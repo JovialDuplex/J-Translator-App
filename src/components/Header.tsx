@@ -1,0 +1,30 @@
+import { Moon, Sun, Languages } from "lucide-react";
+import { useTheme } from "@/hooks/useTheme";
+import { Switch } from "@/components/ui/switch";
+
+export function Header() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <header className="w-full py-4 px-6 flex items-center justify-between border-b border-border bg-card/50 backdrop-blur-sm">
+      <div className="flex items-center gap-3">
+        <div className="p-2 rounded-xl bg-gradient-to-br from-primary to-accent">
+          <Languages className="h-6 w-6 text-primary-foreground" />
+        </div>
+        <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          TransLingo
+        </h1>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <Sun className="h-4 w-4 text-muted-foreground" />
+        <Switch
+          checked={theme === "dark"}
+          onCheckedChange={toggleTheme}
+          className="data-[state=checked]:bg-primary"
+        />
+        <Moon className="h-4 w-4 text-muted-foreground" />
+      </div>
+    </header>
+  );
+}
