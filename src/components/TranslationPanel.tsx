@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { ArrowRightLeft, Copy, Volume2, X, Check } from "lucide-react";
+import { ArrowRightLeft, Copy, Volume2, X, Check, Languages } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { cn } from "@/lib/utils";
-
 export function TranslationPanel() {
   const [sourceText, setSourceText] = useState("Bonjour, comment allez-vous ?");
   const [translatedText] = useState("Hello, how are you?");
@@ -61,9 +60,18 @@ export function TranslationPanel() {
               </Button>
             </div>
           </div>
-          <p className="text-xs text-muted-foreground mt-2">
-            {sourceText.length} caractères
-          </p>
+          <div className="flex items-center justify-between mt-3">
+            <p className="text-xs text-muted-foreground">
+              {sourceText.length} caractères
+            </p>
+            <Button
+              onClick={() => {}}
+              className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
+            >
+              <Languages className="h-4 w-4 mr-2" />
+              Traduire
+            </Button>
+          </div>
         </div>
 
         {/* Swap Button - Desktop */}
