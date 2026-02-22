@@ -4,12 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { cn } from "@/lib/utils";
+import axios from "axios";
+
+
 export function TranslationPanel() {
   const [sourceText, setSourceText] = useState("Bonjour, comment allez-vous ?");
   const [translatedText, setTranslateText] = useState("hello, how are you ?");
   const [sourceLang, setSourceLang] = useState("fr");
   const [targetLang, setTargetLang] = useState("en");
   const [copied, setCopied] = useState(false);
+  const [loading, setLoading]=useState(false);
 
   const handleSwapLanguages = () => {
     setSourceLang(targetLang);
@@ -32,6 +36,60 @@ export function TranslationPanel() {
     setSourceText("");
     setTranslateText("");
   };
+
+  const translate = async ()=>{
+    console.log("source language: ", sourceLang);
+    console.log("target language: ", targetLang);
+    console.log(import.meta.env.VITE_API_FR_EN_URL);
+    const fr_en_url = import.meta.env.VITE_FR_EN_URL;
+    const en_fr_url = import.meta.env.VITE_EN_FR_URL;
+    setTranslateText("");
+
+    if (sourceLang == "fr") {
+      console.log("translation in english...");
+      setLoading(true);
+      try {
+        const response = await axios.post(fr_en_url, {"text": sourceText}, {
+          headers: {
+            "Content-Type" : "multipart/form-data"
+          }
+        });
+        const data = await response.data;
+        setTranslateText(data["translation-text"]);
+
+      } catch (error) {
+        console.log("error : ", error);
+        setLoading(false);
+
+      } finally {
+        setLoading(false);
+      }
+
+
+    } else if (sourceLang == "en") {
+      console.log("translation in french...");
+      try {
+        setLoading(true);
+        const response = await axios.post(en_fr_url, {"text": sourceText}, {
+          headers: {
+            "Content-Type" : "multipart/form-data"
+          }
+        });
+        const data = await response.data;
+        setTranslateText(data["translation-text"]);
+
+      } catch(error) {
+        console.log("error : ", error);
+        setLoading(false);
+
+      } finally {
+        setLoading(false);
+        console.log("end of request ..")
+      }
+    }
+
+    // const response = await axios.post()
+  }
 
   return (
     <div className="w-full max-w-6xl mx-auto p-4 md:p-6">
@@ -66,7 +124,7 @@ export function TranslationPanel() {
               {sourceText.length} characters
             </p>
             <Button
-              onClick={() => {}}
+              onClick={()=>{translate();}}
               className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
             >
               <Languages className="h-4 w-4 mr-2" />
@@ -108,7 +166,7 @@ export function TranslationPanel() {
           />
           <div className="mt-4 relative">
             <Textarea
-              value={translatedText}
+              value={loading ? "Translating ..." : translatedText}
               readOnly
               placeholder="Translation..."
               className="min-h-[200px] md:min-h-[250px] resize-none bg-background/50 border-border text-foreground cursor-default"
