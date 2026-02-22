@@ -22,17 +22,17 @@ const mockHistory = [
   {
     id: 3,
     source: "The weather is beautiful today",
-    translated: "El clima está hermoso hoy",
+    translated: "Il fait beaux temps aujourd'hui",
     sourceLang: "EN",
-    targetLang: "ES",
+    targetLang: "FR",
     time: "Il y a 1h",
   },
   {
     id: 4,
-    source: "Guten Morgen",
-    translated: "Buongiorno",
-    sourceLang: "DE",
-    targetLang: "IT",
+    source: "This is a translation application",
+    translated: "c'est une application de traduction",
+    sourceLang: "EN",
+    targetLang: "FR",
     time: "Il y a 2h",
   },
 ];

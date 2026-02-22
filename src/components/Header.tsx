@@ -1,7 +1,6 @@
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Languages } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 import { Switch } from "@/components/ui/switch";
-import logo from "@/assets/logo.png";
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
@@ -9,7 +8,8 @@ export function Header() {
   return (
     <header className="w-full py-4 px-6 flex items-center justify-between border-b border-border bg-card/50 backdrop-blur-sm">
       <div className="flex items-center gap-3">
-        <img src={logo} alt="Kandy Shopping" className="h-12 w-auto" />
+        <Languages className={"text-primary font-bold text-2xl "} /> <span className={"text-primary font-bold text-2xl"}> J-Translator </span>
+        {/* <img src={logo} alt="Kandy Shopping" className="h-12 w-auto" /> */}
       </div>
 
       <div className="flex items-center gap-3">

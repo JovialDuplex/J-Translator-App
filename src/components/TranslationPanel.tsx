@@ -6,7 +6,7 @@ import { LanguageSelector } from "@/components/LanguageSelector";
 import { cn } from "@/lib/utils";
 export function TranslationPanel() {
   const [sourceText, setSourceText] = useState("Bonjour, comment allez-vous ?");
-  const [translatedText] = useState("Hello, how are you?");
+  const [translatedText, setTranslateText] = useState("hello, how are you ?");
   const [sourceLang, setSourceLang] = useState("fr");
   const [targetLang, setTargetLang] = useState("en");
   const [copied, setCopied] = useState(false);
@@ -30,6 +30,7 @@ export function TranslationPanel() {
 
   const handleClear = () => {
     setSourceText("");
+    setTranslateText("");
   };
 
   return (
@@ -40,13 +41,13 @@ export function TranslationPanel() {
           <LanguageSelector
             value={sourceLang}
             onChange={setSourceLang}
-            label="Langue source"
+            label="Source Language"
           />
           <div className="mt-4 relative">
             <Textarea
               value={sourceText}
               onChange={(e) => setSourceText(e.target.value)}
-              placeholder="Entrez le texte à traduire..."
+              placeholder="Enter a translate text..."
               className="min-h-[200px] md:min-h-[250px] resize-none bg-background border-border text-foreground placeholder:text-muted-foreground focus:ring-primary/50"
             />
             <div className="absolute bottom-3 right-3 flex gap-2">
@@ -62,14 +63,14 @@ export function TranslationPanel() {
           </div>
           <div className="flex items-center justify-between mt-3">
             <p className="text-xs text-muted-foreground">
-              {sourceText.length} caractères
+              {sourceText.length} characters
             </p>
             <Button
               onClick={() => {}}
               className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
             >
               <Languages className="h-4 w-4 mr-2" />
-              Traduire
+              Translate
             </Button>
           </div>
         </div>
@@ -103,13 +104,13 @@ export function TranslationPanel() {
           <LanguageSelector
             value={targetLang}
             onChange={setTargetLang}
-            label="Langue cible"
+            label="Target Language"
           />
           <div className="mt-4 relative">
             <Textarea
               value={translatedText}
               readOnly
-              placeholder="Traduction..."
+              placeholder="Translation..."
               className="min-h-[200px] md:min-h-[250px] resize-none bg-background/50 border-border text-foreground cursor-default"
             />
             <div className="absolute bottom-3 right-3 flex gap-2">
@@ -137,7 +138,7 @@ export function TranslationPanel() {
             </div>
           </div>
           <p className="text-xs text-muted-foreground mt-2">
-            {translatedText.length} caractères
+            {translatedText.length} Characters
           </p>
         </div>
       </div>
