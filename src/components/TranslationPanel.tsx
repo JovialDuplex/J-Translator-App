@@ -40,9 +40,11 @@ export function TranslationPanel() {
   const translate = async ()=>{
     console.log("source language: ", sourceLang);
     console.log("target language: ", targetLang);
-    console.log(import.meta.env.VITE_API_FR_EN_URL);
     const fr_en_url = import.meta.env.VITE_FR_EN_URL;
     const en_fr_url = import.meta.env.VITE_EN_FR_URL;
+    
+    console.log("url : fr-en -> ", fr_en_url, " en-fr -> ", en_fr_url);
+
     setTranslateText("");
 
     if (sourceLang == "fr") {
