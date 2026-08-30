@@ -51,7 +51,11 @@ export function TranslationPanel() {
       console.log("translation in english...");
       setLoading(true);
       try {
-        const response = await axios.post(fr_en_url, {"text": sourceText});
+        const response = await axios.post(fr_en_url, {"text": sourceText}, {
+          headers: {
+            "Content-Type" : "multipart/form-data"
+          }
+        });
         const data = await response.data;
         setTranslateText(data["translation-text"]);
 
@@ -68,7 +72,11 @@ export function TranslationPanel() {
       console.log("translation in french...");
       try {
         setLoading(true);
-        const response = await axios.post(en_fr_url, {"text": sourceText});
+        const response = await axios.post(en_fr_url, {"text": sourceText}, {
+          headers: {
+            "Content-Type" : "multipart/form-data"
+          }
+        });
         const data = await response.data;
         setTranslateText(data["translation-text"]);
 
